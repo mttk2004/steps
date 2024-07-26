@@ -7,6 +7,8 @@
  */
 
 import { useState } from 'react';
+import Button       from './Button.jsx';
+import StepMessage  from './StepMessage.jsx';
 
 
 const messages = [
@@ -25,11 +27,6 @@ export default function App() {
 function Steps() {
 	const [step, setStep] = useState(1);
 	const [isOpen, setIsOpen] = useState(true);
-	
-	const buttonsStyle = {
-		color          : '#fff',
-		backgroundColor: '#7950f2'
-	};
 	
 	const handlerPrevious = function () {
 		if (step > 1) setStep(step => step - 1);
@@ -51,11 +48,15 @@ function Steps() {
 				 <div className={step >= 3 ? 'active' : ''}>3</div>
 			 </div>
 			 
-			 <p className="message">Step {step}: {messages[step - 1]}</p>
+			 <StepMessage step={step}>{messages[step - 1]}</StepMessage>
 			 
 			 <div className="buttons">
-				 <button style={buttonsStyle} onClick={handlerPrevious}>Previous</button>
-				 <button style={buttonsStyle} onClick={handlerNext}>Next</button>
+				 <Button bgColor='#7950f2' textColor='#fff' onClick={handlerPrevious}>
+					 <span>👈</span> Previous
+				 </Button>
+				 <Button bgColor='#7950f2' textColor='#fff' onClick={handlerNext}>
+					 Next <span>👉</span>
+				 </Button>
 			 </div>
 		 </div>
 		}
